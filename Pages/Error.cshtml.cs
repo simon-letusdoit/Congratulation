@@ -22,10 +22,29 @@ namespace Congratulations.Pages
         public ErrorModel(ILogger<ErrorModel> logger)
         {
             _logger = logger;
+            _logger.LogDebug("SACTEST");
+            _logger.LogDebug("SACTEST");
+            _logger.LogDebug("SACTEST");
+            _logger.LogDebug("SACTEST");
+            _logger.LogDebug("SACTEST");
+            _logger.LogDebug("SACTEST");
+            _logger.LogDebug("SACTEST");
+            _logger.LogDebug("SACTEST");
+
+
+
         }
 
         public void OnGet()
         {
+            _logger.LogDebug("SACTEST");
+            _logger.LogDebug("SACTEST");
+            _logger.LogDebug("SACTEST");
+            _logger.LogDebug("SACTEST");
+            _logger.LogDebug("SACTEST");
+            _logger.LogDebug("SACTEST");
+            _logger.LogDebug("SACTEST");
+            _logger.LogDebug("SACTEST");
             RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
         }
     }
