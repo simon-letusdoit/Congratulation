@@ -45,6 +45,14 @@ namespace Congratulations.Pages
             _logger.LogDebug("SACTEST");
             _logger.LogDebug("SACTEST");
             _logger.LogDebug("SACTEST");
+            _logger.LogDebug("SACTEST");
+            _logger.LogDebug("SACTEST");
+            _logger.LogDebug("SACTEST");
+            _logger.LogDebug("SACTEST");
+            _logger.LogDebug("SACTEST");
+            _logger.LogDebug("SACTEST");
+            _logger.LogDebug("SACTEST");
+            _logger.LogDebug("SACTEST");
             RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
         }
     }
