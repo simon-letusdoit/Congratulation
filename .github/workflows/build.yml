@@ -7,22 +7,6 @@ on:
     types: [opened, synchronize, reopened]
 jobs:
   build:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        java-version: [ 8, 11, 17 ]
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up JDK ${{ matrix.java-version }}
-      uses: actions/setup-java@v2
-      with:
-        java-version: ${{ matrix.java-version }}
-        distribution: 'adopt'
-        cache: gradle
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-    - name: Build with Gradle
-      run: ./gradlew build
     name: Build and analyze
     runs-on: windows-latest
     steps:
@@ -40,6 +24,10 @@ jobs:
           path: ~\sonar\cache
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
+      - name: Install dotnet-coverage
+        shell: powershell
+        run: |
+            dotnet tool install --global dotnet-coverage
       - name: Cache SonarCloud scanner
         id: cache-sonar-scanner
         uses: actions/cache@v3
@@ -61,4 +49,5 @@ jobs:
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"simon-letusdoit_Congratulation" /o:"simon-letusdoit" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
           dotnet build
+          dotnet-coverage collect "dotnet test" -f xml -o "coverage.xml"
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
